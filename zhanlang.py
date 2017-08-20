@@ -5,6 +5,8 @@ import urllib.parse
 from bs4 import BeautifulSoup
 import random
 import re
+
+import string
 import os
 
 class Zhanlang(object):
@@ -58,7 +60,7 @@ class Zhanlang(object):
         proxy_support = urllib.request.ProxyHandler({'sock5':random.choice(self.iplist)})
         opener = urllib.request.build_opener(proxy_support)
         urllib.request.install_opener(opener)
-        html = urllib.request.urlopen(url, data= self.data())
+        html = opener.open(url, data= self.data())
         htm = html.read().decode("utf-8")
         soup = BeautifulSoup(htm,"lxml")
         reviewer_urls = soup.find_all('a', 'title-link')
@@ -74,13 +76,13 @@ class Zhanlang(object):
         proxy_support = urllib.request.ProxyHandler({'sock5':random.choice(self.iplist)})
         opener = urllib.request.build_opener(proxy_support)
         urllib.request.install_opener(opener)
-        f = urllib.request.urlopen(url,data= self.data(),timeout=10)
+        f = oener.open(url,data= self.data(),timeout=10)
         soup = BeautifulSoup(f.read().decode('utf-8'), 'lxml')
         #得到评论人
         reviewer = soup.find_all('span', property='v:reviewer')[0].get_text()
         #if not os.path.exists(reviewer+'.txt'):
             #exit()
-        string ='/\.*?《》：；”|'
+        string_1 = string.punctuation
         for str_1 in string:
             reviewer= reviewer.replace(str_1,'')
         content = []

@@ -40,16 +40,9 @@ class Zhanlang(object):
             self.spider(url)
 
     def data(self):
-        #cookie = open("cookie.txt", "r")
         ua = random.choice(self.user_agent_list)
-        data = {
-            "Accept": "text / html, application / xhtml + xml, application / xml;q = 0.9, image / webp, * / *;q = 0.8",
-            "Accept - Encoding": "gzip, deflate, sdch, br",
-            "Accept - Language": "zh - CN, zh;q = 0.8, en;q = 0.6",
-            "Connection": "keep - alive",
-            #"cookie": cookie,
+        data ={
             "Host": "movie.douban.com",
-            "Upgrade-Insecure-Requests": "1",
             "User-Agent": ua,
             }
         data = urllib.parse.urlencode(data).encode('utf-8')

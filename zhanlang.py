@@ -52,7 +52,6 @@ class Zhanlang(object):
         time.sleep(2)
         proxy_support = urllib.request.ProxyHandler({'sock5':random.choice(self.iplist)})
         opener = urllib.request.build_opener(proxy_support)
-        urllib.request.install_opener(opener)
         html = opener.open(url, data= self.data())
         htm = html.read().decode("utf-8")
         soup = BeautifulSoup(htm,"lxml")
@@ -68,7 +67,6 @@ class Zhanlang(object):
     def spider_1(self,url):
         proxy_support = urllib.request.ProxyHandler({'sock5':random.choice(self.iplist)})
         opener = urllib.request.build_opener(proxy_support)
-        urllib.request.install_opener(opener)
         f = oener.open(url,data= self.data(),timeout=10)
         soup = BeautifulSoup(f.read().decode('utf-8'), 'lxml')
         #得到评论人
